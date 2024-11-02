@@ -6,6 +6,11 @@ import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import {  CiMenuFries } from 'react-icons/ci';
 
+import Image from 'next/image';
+
+//logo
+import Logo from '../public/assets/logo.png';
+
 const links = [
     {
         name: 'home',
@@ -14,18 +19,6 @@ const links = [
     {
         name: 'about',
         path: '/about',
-    },
-    {
-        name: 'services',
-        path: '/services',
-    },
-    // {
-    //     name: 'communication',
-    //     path: '/communication',
-    // },
-    {
-        name: 'contact',
-        path: '/contact',
     },
 ];
 
@@ -43,12 +36,17 @@ const MobileNav = () => {
             <CiMenuFries className="text-[32px] text-accent" />
         </SheetTrigger>
         <SheetContent  className="flex flex-col">
-            {/* logo */}
-            <div className="mt-32 mb-20 text-center text-2xl">
-                <Link href="/" onClick={handleLinkClick}>
-                    <h1 className="text-4xl font-semibold">Demo<span className="text-accent">.</span></h1>
-                </Link>
-            </div>
+        <div className="flex justify-center items-center mt-32 mb-10">
+            <Link href="/">
+                <Image 
+                    src={Logo} 
+                    alt="Logo" 
+                    width={170} 
+                    height={170} 
+                    className="hover:scale-105 transition-transform" 
+                />
+            </Link>
+        </div>
 
             {/* nav */}
             <nav className="flex flex-col justify-center items-center gap-8">
