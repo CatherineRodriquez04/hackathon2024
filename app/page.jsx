@@ -3,8 +3,10 @@
 
 export default function Home() {
   return (
-    <div className="container h-screen w-screen text-center mt-6">
-      <h1 className="h1">Hackathon24</h1>
+    <div className="h-screen w-screen text-center mt-6">
+      <div className="mx-10 justify-start items-start text-left">
+        <h1 className="h1 text-accent">Beyond Boundaries</h1>
+      </div>
     </div>
   );
 }
