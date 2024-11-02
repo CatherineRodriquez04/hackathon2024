@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
+import Image from "next/image";
+
+//logo
+import Logo from "../public/assets/logo.png";
 
 //components
 import Nav from "./Nav";
@@ -9,13 +13,11 @@ import MobileNav from "./MobileNav";
 
 const Header = () => {
   return (
-    <header className="py-8 xl:py-12 text-black">
+    <header className="py-4 xl:py-4 text-black">
       <div className="mx-8 flex justify-between items-center">
         {/* logo */}
         <Link href="/">
-          <h1 className="text-4xl fonts-semibold hover:scale-110">
-            Demo<span className="text-accent">.</span>
-          </h1>
+          <Image src={Logo} alt="Logo" width={125} height={125} className="hover:scale-105" />
         </Link>
 
         {/* desktop nav & hire me button */}
@@ -32,7 +34,7 @@ const Header = () => {
         </div>
       </div>
       {/* border */}
-      <div className="mt-2 border border-black/10"></div>
+      <div className="mt-2 border border-[#69AC5A]"></div>
     </header>
   );
 };

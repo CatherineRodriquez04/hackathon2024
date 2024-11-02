@@ -10,18 +10,6 @@ const links = [
         name: 'about',
         path: '/about',
     },
-    {
-        name: 'services',
-        path: '/services',
-    },
-    // {
-    //     name: 'communication',
-    //     path: '/communication',
-    // },
-    {
-        name: 'contact',
-        path: '/contact',
-    },
 ];
 
 const Nav = () => {

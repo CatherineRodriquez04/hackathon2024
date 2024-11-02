@@ -21,14 +21,19 @@ module.exports = {
 	  },
 	  fontFamily:{
 		primary: "var(--font-roboto)",
+		title: "var(--font-source-sans)",
 	  },
 	  extend: {
   
 		colors: {
 		  primary: 'white',
 		  accent: {
-			DEFAULT: '#58A07D',
-			hover: '#58A07D',
+			DEFAULT: '#FBAC23',
+			hover: '#FBAC23',
+		  },
+		  accent2: {
+			DEFAULT: '#69AC5A',
+			hover: '#69AC5A',
 		  }
 		},
   
