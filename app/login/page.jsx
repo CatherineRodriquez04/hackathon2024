@@ -1,5 +1,5 @@
 //import Image from "next/image";
-"use client"
+"use client";
 
 export default function login() {
   return (
