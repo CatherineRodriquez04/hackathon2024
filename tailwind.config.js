@@ -21,7 +21,7 @@ module.exports = {
 	  },
 	  fontFamily:{
 		primary: "var(--font-roboto)",
-		title: "var(--font-source-sans)",
+		title: "['Source Sans Pro', sans-serif]",
 	  },
 	  extend: {
   

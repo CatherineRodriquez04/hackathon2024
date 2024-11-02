@@ -1,5 +1,4 @@
 import { Roboto } from "next/font/google";
-import { Source_Sans_Pro } from '@next/font/google';
 import "./globals.css";
 
 //components
@@ -12,11 +11,6 @@ const roboto = Roboto({
   variable: '--font-roboto', 
 });
 
-const sourceSans = Source_Sans_Pro({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-source-sans', 
-});
 
 export const metadata = {
   title: "Beyond Boundaries",
@@ -26,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${sourceSans.variable}`}>
+      <body className={roboto.variable}>
         <Header />
         {children}
         <Footer />
