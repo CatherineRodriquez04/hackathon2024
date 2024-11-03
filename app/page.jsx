@@ -50,7 +50,7 @@ export default function Home() {
       <div className="relative w-full h-[calc(100vh-4rem)] overflow-hidden">
         {/* Background Video */}
         <video
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          className="rounded-lg absolute inset-0 w-screen h-full object-cover z-0"
           autoPlay
           loop
           muted
