@@ -17,8 +17,8 @@ const links = [
         path: '/',
     },
     {
-        name: 'about',
-        path: '/about',
+        name: 'map',
+        path: '/map',
     },
 ];
 
