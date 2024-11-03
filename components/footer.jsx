@@ -37,7 +37,10 @@ const Footer = () => {
                     <Link href="/">
                         <Image src={Logo} alt="Logo" width={125} height={125} className="hover:scale-105" />
                     </Link>
-                    <p className="font-semibold">Discover New Horizons</p>
+                    <p className="text-2xl font-semibold -mt-2">
+                        Beyond Boundaries<span className="text-[35px] font-semibold text-accent">.</span>
+                    </p>
+                    <p className="font-semibold text-md -mt-1">Discover New Horizons</p>
                 </div>
                 <div className="mt-6">
                     <h3 className="text-lg font-semibold">Resources</h3>
