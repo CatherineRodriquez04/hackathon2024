@@ -17,6 +17,7 @@ import Chat from "@/components/Chat";
 
 export default function ChatPage() {
   const [chatIDs, setChatIDs] = useState([]);
+  const [guideNames, setGuideNames] = useState([]);
 
   const [selectedChatID, setSelectedChatID] = useState(null);
 
@@ -42,6 +43,7 @@ export default function ChatPage() {
 
     const unsubscribe = onSnapshot(chatRef, (querySnapshot) => {
       const idsWithTimes = [];
+      const gNames = [];
 
       querySnapshot.forEach((doc) => {
         const messages = doc.data().messages;
@@ -54,6 +56,8 @@ export default function ChatPage() {
           id: doc.id,
           latestTime: latestTime || 0, // Default to 0 if no time exists
         });
+
+        gNames.push(doc.data().guide_name);
       });
 
       // Sort by `latestTime` and extract only the IDs
@@ -61,14 +65,15 @@ export default function ChatPage() {
       const sortedIds = idsWithTimes.map((item) => item.id);
 
       setChatIDs(sortedIds); // Set sorted IDs
+      setGuideNames(gNames); // Set guide names
     });
 
     return () => unsubscribe();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("Updated chat IDs: ", chatIDs);
-  // }, [chatIDs]);
+  useEffect(() => {
+    console.log("Updated chat IDs: ", guideNames);
+  }, [guideNames]);
 
   return (
     <div className="flex flex-row">
@@ -79,7 +84,14 @@ export default function ChatPage() {
               key={index}
               className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
             >
-              <div onClick={() => setSelectedChatID(id)}>Dudes Name</div>
+              <div
+                onClick={() => {
+                  console.log(id);
+                  return setSelectedChatID(id);
+                }}
+              >
+                {guideNames[index]}
+              </div>
             </li>
           ))}
         </ul>
