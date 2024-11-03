@@ -11,8 +11,6 @@ import {
   onSnapshot,
   doc,
   getDoc,
-  doc,
-  getDoc,
 } from "firebase/firestore";
 import Link from "next/link";
 
