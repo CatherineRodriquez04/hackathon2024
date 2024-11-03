@@ -33,7 +33,7 @@ const Footer = () => {
 
   return (
     <footer className={`footerBg ${isDarkMode ? "dark" : "light"}`}>
-      <div className="py-6 mt-6 mx-auto flex flex-col md:flex-row justify-between px-10">
+      <div className="py-6 mt-12 mx-auto flex flex-col md:flex-row justify-between px-10">
         <div>
           {/* logo */}
           <Link href="/">

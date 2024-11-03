@@ -8,7 +8,7 @@ import { guideProfiles } from "@/utils/scripts/generateGuides";
 
 import Image from "next/image";
 
-export default function About() {
+export default function MapPage() {
   const [countryInfo, setCountryInfo] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [map, setMap] = useState(null);
@@ -21,21 +21,21 @@ export default function About() {
         mapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDhn_rFuizz3NL5W8Ksv6LCLviYhKql9X0`; // Replace with your Google Maps API key
         mapScript.async = true;
         mapScript.defer = true;
-        mapScript.onload = initMap; // Call initMap once the script is loaded
+        mapScript.onload = initMap;
         document.body.appendChild(mapScript);
       }
     };
 
     const initMap = () => {
       const mapOptions = {
-        center: { lat: 20.5937, lng: 78.9629 }, // Default to India
+        center: { lat: 20.5937, lng: 78.9629 },
         zoom: 2,
       };
       const initializedMap = new window.google.maps.Map(
         document.getElementById("map"),
         mapOptions
       );
-      setMap(initializedMap); // Store the map instance in state
+      setMap(initializedMap);
     };
 
     loadMap();
@@ -57,21 +57,19 @@ export default function About() {
     if (map && selected) {
       const { lat, lng } = countries[selected].coordinates;
       map.setCenter({ lat, lng });
-      map.setZoom(5); // Adjust zoom level as needed
+      map.setZoom(5);
 
-      // If a marker already exists, remove it before adding a new one
       if (marker) {
         marker.setMap(null);
       }
 
-      // Create a new marker at the selected country's coordinates
       const newMarker = new window.google.maps.Marker({
         position: { lat, lng },
         map: map,
         title: selected,
       });
 
-      setMarker(newMarker); // Store the marker in state
+      setMarker(newMarker);
     }
   };
 
@@ -108,18 +106,21 @@ export default function About() {
 
       {countryInfo && (
         <div className="flex flex-col items-center justify-center mt-6 space-x-4">
-          <div className="flex flex-row">
+          <div className="flex flex-row justify-center gap-[60px] ">
             {/* Flag */}
             <Image
               src={countryInfo.flags}
               alt={`${countryInfo.capital} flag`}
-              width={80}
-              height={80}
+              width={300}
+              height={175}
+              className="object-cover border border-gray-500"
             />
 
             {/* Country Info */}
-            <div className="text-left">
-              <h2 className="text-xl font-bold">{countryInfo.touristSpot}</h2>
+            <div className="text-center">
+              <h2 className="text-2xl text-accent2 font-semibold">
+                {countryInfo.country}
+              </h2>
               <p>
                 <strong>Capital:</strong> {countryInfo.capital}
               </p>
@@ -131,6 +132,9 @@ export default function About() {
               </p>
               <p>
                 <strong>Region:</strong> {countryInfo.region}
+              </p>
+              <p>
+                <strong>Languages:</strong> {countryInfo.languages.join(", ")}
               </p>
             </div>
 
