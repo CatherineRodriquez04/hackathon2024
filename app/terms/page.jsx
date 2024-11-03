@@ -6,8 +6,8 @@ export default function Terms() {
   return (
     <div className="container mx-auto h-screen w-full overflow-auto p-8">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2 text-accent">Terms and Conditions</h1>
-        <p className="text-lg text-accent">Last updated: November 2, 2024</p>
+        <h1 className="text-4xl font-bold mb-2 text-black">Terms and Conditions</h1>
+        <p className="text-lg text-accent2">Last updated: November 2, 2024</p>
       </div>
 
       <div className="space-y-6">
