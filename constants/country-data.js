@@ -1,5 +1,24 @@
 /** @format */
 
+//images
+import GrandCanyon from "@/public/assets/touristSpot/grand-canyon.jpg";
+import EiffelTower from "@/public/assets/touristSpot/eiffel-tower.webp";
+import Colosseum from "@/public/assets/touristSpot/colosseum.jpg";
+import Fjords from "@/public/assets/touristSpot/fjords.jpg";
+import Vasa from "@/public/assets/touristSpot/vasa.webp";
+import Brandenburg from "@/public/assets/touristSpot/brandenburg.jpg";
+import Matterhorn from "@/public/assets/touristSpot/matterhorn.jpg";
+import BigBen from "@/public/assets/touristSpot/big-ben.jpg";
+import Niagara from "@/public/assets/touristSpot/niagara.jpg";
+import GreatWalls from "@/public/assets/touristSpot/great-wall-of-china.webp";
+import Gyeongbokgung from "@/public/assets/touristSpot/gyeongbokgung.webp";
+import MountFuji from "@/public/assets/touristSpot/mount-fuji.webp";
+import Taj from "@/public/assets/touristSpot/taj.jpg";
+import Everest from "@/public/assets/touristSpot/everest.jpg";
+import HaLong from "@/public/assets/touristSpot/ha-long.jpg";
+import Phi from "@/public/assets/touristSpot/phi.jpg";
+import Acropolis from "@/public/assets/touristSpot/acropolis.jpg";
+
 export const countries = {
   "United States": {
     flags: "https://flagcdn.com/us.svg",
@@ -20,9 +39,8 @@ export const countries = {
     population: "331 million",
     area: "9.834 million km²",
     region: "Americas",
-    touristSpot: "Statue of Liberty",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Statue_of_Liberty_%28cropped%29.jpg/800px-Statue_of_Liberty_%28cropped%29.jpg",
+    touristSpot: "Grand Canyon",
+    touristImage: GrandCanyon,
     coordinates: { lat: 37.0902, lng: -95.7129 },
     languages: ["English"],
   },
@@ -46,8 +64,7 @@ export const countries = {
     area: "551,695 km²",
     region: "Europe",
     touristSpot: "Eiffel Tower",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Tour_Eiffel_Wikimedia_Commons.jpg/800px-Tour_Eiffel_Wikimedia_Commons.jpg",
+    touristImage: EiffelTower,
     coordinates: { lat: 48.8566, lng: 2.3522 },
     languages: ["French"],
   },
@@ -71,8 +88,7 @@ export const countries = {
     area: "301,340 km²",
     region: "Europe",
     touristSpot: "Colosseum",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Colosseo_2021.jpg/800px-Colosseo_2021.jpg",
+    touristImage: Colosseum,
     coordinates: { lat: 41.9028, lng: 12.4964 },
     languages: ["Italian"],
   },
@@ -96,8 +112,7 @@ export const countries = {
     area: "323,802 km²",
     region: "Europe",
     touristSpot: "Fjord of Norway",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Norway_Fjord.jpg/800px-Norway_Fjord.jpg",
+    touristImage: Fjords,
     coordinates: { lat: 60.472, lng: 8.4689 },
     languages: ["Norwegian"],
   },
@@ -121,8 +136,7 @@ export const countries = {
     area: "450,295 km²",
     region: "Europe",
     touristSpot: "Vasa Museum",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Vasa_Museum%2C_Stockholm_%2811416971982%29.jpg/800px-Vasa_Museum%2C_Stockholm_%2811416971982%29.jpg",
+    touristImage: Vasa,
     coordinates: { lat: 60.1282, lng: 18.6435 },
     languages: ["Swedish"],
   },
@@ -146,8 +160,7 @@ export const countries = {
     area: "357,022 km²",
     region: "Europe",
     touristSpot: "Brandenburg Gate",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Brandenburg_Gate_at_night.jpg/800px-Brandenburg_Gate_at_night.jpg",
+    touristImage: Brandenburg,
     coordinates: { lat: 51.1657, lng: 10.4515 },
     languages: ["German"],
   },
@@ -171,8 +184,7 @@ export const countries = {
     area: "41,290 km²",
     region: "Europe",
     touristSpot: "Matterhorn",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Matterhorn%2C_Val_Tournenche%2C_Italy_-_by_R_M_A.jpg/800px-Matterhorn%2C_Val_Tournenche%2C_Italy_-_by_R_M_A.jpg",
+    touristImage: Matterhorn,
     coordinates: { lat: 46.8182, lng: 8.2275 },
     languages: ["German", "French", "Italian"],
   },
@@ -196,8 +208,7 @@ export const countries = {
     area: "130,395 km²",
     region: "Europe",
     touristSpot: "Big Ben",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Big_Ben%2C_London%2C_England_%28cropped%29.jpg/800px-Big_Ben%2C_London%2C_England_%28cropped%29.jpg",
+    touristImage: BigBen,
     coordinates: { lat: 51.509865, lng: -0.118092 },
     languages: ["English"],
   },
@@ -220,9 +231,8 @@ export const countries = {
     population: "38 million",
     area: "9.985 million km²",
     region: "Americas",
-    touristSpot: "CN Tower",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/CN_Tower_%28cropped%29.jpg/800px-CN_Tower_%28cropped%29.jpg",
+    touristSpot: "Niagara",
+    touristImage: Niagara,
     coordinates: { lat: 56.1304, lng: -106.3468 },
     languages: ["English", "French"],
   },
@@ -246,8 +256,7 @@ export const countries = {
     area: "9.597 million km²",
     region: "Asia",
     touristSpot: "Great Wall of China",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Great_Wall_of_China_%28cropped%29.jpg/800px-Great_Wall_of_China_%28cropped%29.jpg",
+    touristImage: GreatWalls,
     coordinates: { lat: 35.8617, lng: 104.1954 },
     languages: ["Mandarin"],
   },
@@ -271,8 +280,7 @@ export const countries = {
     area: "100,210 km²",
     region: "Asia",
     touristSpot: "Gyeongbokgung Palace",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Gyeongbokgung%2C_Seoul_%2819455256857%29.jpg/800px-Gyeongbokgung%2C_Seoul_%2819455256857%29.jpg",
+    touristImage: Gyeongbokgung,
     coordinates: { lat: 35.9078, lng: 127.7669 },
     languages: ["Korean"],
   },
@@ -296,8 +304,7 @@ export const countries = {
     area: "377,975 km²",
     region: "Asia",
     touristSpot: "Mount Fuji",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Mount_Fuji_%28cropped%29.jpg/800px-Mount_Fuji_%28cropped%29.jpg",
+    touristImage: MountFuji,
     coordinates: { lat: 36.2048, lng: 138.2529 },
     languages: ["Japanese"],
   },
@@ -321,8 +328,7 @@ export const countries = {
     area: "3.287 million km²",
     region: "Asia",
     touristSpot: "Taj Mahal",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Taj_Mahal_%28cropped%29.jpg/800px-Taj_Mahal_%28cropped%29.jpg",
+    touristImage: Taj,
     coordinates: { lat: 20.5937, lng: 78.9629 },
     languages: ["Hindi"],
   },
@@ -346,8 +352,7 @@ export const countries = {
     area: "147,516 km²",
     region: "Asia",
     touristSpot: "Mount Everest",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Mount_Everest_%28cropped%29.jpg/800px-Mount_Everest_%28cropped%29.jpg",
+    touristImage: Everest,
     coordinates: { lat: 28.3949, lng: 84.124 },
     languages: ["Nepali"],
   },
@@ -371,8 +376,7 @@ export const countries = {
     area: "331,210 km²",
     region: "Asia",
     touristSpot: "Halong Bay",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Halong_Bay_%28cropped%29.jpg/800px-Halong_Bay_%28cropped%29.jpg",
+    touristImage: HaLong,
     coordinates: { lat: 14.0583, lng: 108.2772 },
     languages: ["Vietnamese"],
   },
@@ -396,8 +400,7 @@ export const countries = {
     area: "513,120 km²",
     region: "Asia",
     touristSpot: "Grand Palace",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Grand_Palace_Bangkok_%28cropped%29.jpg/800px-Grand_Palace_Bangkok_%28cropped%29.jpg",
+    touristImage: Phi,
     coordinates: { lat: 15.87, lng: 100.9925 },
     languages: ["Thai"],
   },
@@ -421,8 +424,7 @@ export const countries = {
     area: "131,957 km²",
     region: "Europe",
     touristSpot: "Acropolis of Athens",
-    touristImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Acropolis_of_Athens_%28cropped%29.jpg/800px-Acropolis_of_Athens_%28cropped%29.jpg",
+    touristImage: Acropolis,
     coordinates: { lat: 37.9838, lng: 23.7275 },
     languages: ["Greek"],
   },

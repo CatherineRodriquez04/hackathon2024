@@ -135,13 +135,18 @@ export default function About() {
             </div>
 
             {/* Tourist Spot Image */}
-            <Image
-              src={countryInfo.touristImage}
-              alt={`${countryInfo.touristSpot}`}
-              width={96}
-              height={144}
-              className="rounded-lg shadow-md"
-            />
+            <div className="-mb-10">
+              <Image
+                src={countryInfo.touristImage}
+                alt={countryInfo.touristSpot}
+                height={200}
+                width={275}
+                className=""
+              />
+              <p className="text-accent font-semibold">
+                {countryInfo.touristSpot.name}
+              </p>
+            </div>
           </div>
           <div>
             <h2 className="text-xl font-bold">Guides</h2>
