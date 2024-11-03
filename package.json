@@ -29,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.1.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",
