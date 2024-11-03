@@ -9,31 +9,57 @@ import {
   query,
   orderBy,
   onSnapshot,
-  addDoc,
-  getDocs,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 import Link from "next/link";
 
 export default function ChatPage() {
   const [chatIDs, setChatIDs] = useState([]);
 
-  // Sets messages every time the onSnapshot recognizes it needs to
+  // const fetchChatMessages = async () => {
+  //   const chatRef = collection(firestore, "chats"); // Use collection reference directly
+  //   const chatSnapshot = await getDocs(chatRef); // Fetch all documents in the "chats" collection
+
+  //   const chatData = [];
+  //   chatSnapshot.forEach((doc) => {
+  //     chatData.push({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     });
+  //   });
+
+  //   console.log("fetchChatMessages (/chat)... ", chatData);
+
+  //   setChatMessages(chatData);
+  // };
+
   useEffect(() => {
     const chatRef = collection(firestore, "chats");
 
-    const q = query(chatRef, orderBy("times", "asc"));
+    const unsubscribe = onSnapshot(chatRef, (querySnapshot) => {
+      const idsWithTimes = [];
 
-    // onSnapshot attaches listener, but returns the unsubscribe function which cleans everything up
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let ids = [];
-      querySnapshot.forEach((doc, index) => {
-        ids.push(doc.id);
+      querySnapshot.forEach((doc) => {
+        const messages = doc.data().messages;
+        const latestTime =
+          messages && messages.length > 0
+            ? messages[messages.length - 1].time
+            : null; // Get latest time from messages array
+
+        idsWithTimes.push({
+          id: doc.id,
+          latestTime: latestTime || 0, // Default to 0 if no time exists
+        });
       });
 
-      setChatIDs(ids);
+      // Sort by `latestTime` and extract only the IDs
+      idsWithTimes.sort((a, b) => a.latestTime - b.latestTime);
+      const sortedIds = idsWithTimes.map((item) => item.id);
+
+      setChatIDs(sortedIds); // Set sorted IDs
     });
 
-    // Notice unsubscribe cleans everything here when the component is unmounted (and the callback useEffect returns is actually called)
     return () => unsubscribe();
   }, []);
 
@@ -41,25 +67,23 @@ export default function ChatPage() {
   //   console.log("Updated chat IDs: ", chatIDs);
   // }, [chatIDs]);
 
-  const getChat = async () => {
-    const chatRef = collection(firestore, "chat");
-
-    const q = query(chatRef, orderBy("times", "asc"));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
-  };
-
   return (
-    <ul>
-      {chatIDs.map((id, index) => (
-        <li key={index}>
-          <Link href={`chat/params?chatID=${id}`}>{id}</Link>
-        </li>
-      ))}
-    </ul>
+    <div className="flex flex-row">
+      <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
+        <h1 className="self-center">Chat IDs</h1>
+        <p>Click any to go to dynamic route with chat...</p>
+        <ul className="flex flex-col">
+          {chatIDs.map((id, index) => (
+            <li
+              key={index}
+              className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
+            >
+              <Link href={`chat/params?chatID=${id}`}>{id}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex flex-col flex-[5] bg-gray-500 border border-gray-300"></div>
+    </div>
   );
 }
