@@ -1,10 +1,13 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 import Image from "next/image";
 import { auth } from "../firebaseConfig";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
-export default function login() {
+export default function Login() {
+  const router = useRouter();
+
   const provider = new GoogleAuthProvider();
 
   const handleGoogleSignIn = async () => {
@@ -14,16 +17,12 @@ export default function login() {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       token = credential.accessToken;
       user = result.user;
-
-      // Check to see if they have registered for has made it passed the credential page
+      // Redirect to a different page after successful login
+      router.push("/preferences");
     } catch (error) {
       console.log(error);
       const errorMessage = error.message;
-      alert("Error during sign in: ", errorMessage);
-    }
-
-    if (token && user) {
-      console.log("User signed in with Google: ", user);
+      // Handle error
     }
   };
 
