@@ -56,18 +56,10 @@ const Footer = () => {
           <ul className="text-[15px]">
             <li>
               <a
-                href="/about"
+                href="/map"
                 className="hover:underline hover:text-accent"
               >
-                About Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="/contact"
-                className="hover:underline hover:text-accent"
-              >
-                Contact Us
+                Map
               </a>
             </li>
           </ul>
