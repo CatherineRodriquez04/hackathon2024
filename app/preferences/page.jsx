@@ -3,27 +3,45 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { auth } from "../firebaseConfig";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 export default function preferencesPage() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
+        setUser(user);
         console.log(user);
-        // ...
       } else {
         // User is signed out
-        // ...
+        router.push("/login");
       }
     });
   }, []);
-  const router = useRouter();
+
+  const greeting = () => {
+    let hour = dayjs().get("hour");
+    if (hour < 12) {
+      return "Good Morning, ";
+    } else if (hour < 18) {
+      return "Good Afternoon, ";
+    } else {
+      return "Good Evening, ";
+    }
+  };
 
   return (
-    <div className="container h-screen w-screen flex flex-row">
-      <h1>Enter your preferences here</h1>
-    </div>
+    <>
+      <div className="container h-screen w-screen flex flex-row">
+        <h2 className="h2">{greeting() + user?.displayName}</h2>
+        <h4 className="h4">
+          Please fill out our preferences form so we can better match you with a
+          mentor that you care about:
+        </h4>
+      </div>
+    </>
   );
 }

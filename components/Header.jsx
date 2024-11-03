@@ -17,14 +17,23 @@ const Header = () => {
       <div className="xl:mx-8 mx-3 flex justify-between items-center">
         {/* logo */}
         <Link href="/">
-          <Image src={Logo} alt="Logo" width={125} height={125} className="hover:scale-105" />
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={125}
+            height={125}
+            className="hover:scale-105"
+          />
         </Link>
 
         <div className="flex-1 text-left mx-[20px]">
           <h1 className="h1 xl:text-[35px] text-[22px]">
-            Beyond Boundaries<span className="text-[40px] font-semibold text-accent">.</span>
+            Beyond Boundaries
+            <span className="text-[40px] font-semibold text-accent">.</span>
           </h1>
-          <p className="h3 xl:text-[20px] text-[17px] text-accent">Discover New Horizons</p>
+          <p className="h3 xl:text-[20px] text-[17px] text-accent">
+            Discover New Horizons
+          </p>
         </div>
 
         {/* desktop nav & hire me button */}
