@@ -12,6 +12,7 @@ export default function PreferencesPage() {
   const [user, setUser] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [matchedGuides, setMatchedGuides] = useState([]);
+  const [preferences, setPreferences] = useState({});
 
   // Fields for the preferences form
   const [gender, setGender] = useState("");
@@ -30,7 +31,11 @@ export default function PreferencesPage() {
           const docRef = doc(firestore, "userPreferences", user.uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            router.push("/dashboard");
+            // read preferences from Firestore
+            const data = docSnap.data();
+            setPreferences(data);
+            matchGuides(preferences);
+            setFormSubmitted(true);
           }
         } catch (error) {
           console.error("Error checking user preferences: ", error);
@@ -66,8 +71,6 @@ export default function PreferencesPage() {
         languages: languages,
       };
 
-      alert(languages);
-
       try {
         await setDoc(
           doc(firestore, "userPreferences", user.uid),
@@ -78,6 +81,7 @@ export default function PreferencesPage() {
         alert("Failed to save preferences. Please try again.");
       }
 
+      setPreferences(userPreferences);
       matchGuides(userPreferences);
       setFormSubmitted(true);
     }
@@ -99,12 +103,39 @@ export default function PreferencesPage() {
     const matched = guideProfiles.filter((guide) => {
       return guide.country === preferences.country;
     });
+    console.log(matched);
     setMatchedGuides(matched);
   };
 
   if (formSubmitted) {
     return (
       <div className="container mx-auto p-4">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-2">Your Preferences</h2>
+          <div className="flex flex-wrap gap-4 bg-gray-100 p-4 rounded-lg">
+            <p>
+              <strong>Gender:</strong> {preferences.gender}
+            </p>
+            <p>
+              <strong>Country:</strong> {preferences.country}
+            </p>
+            <p>
+              <strong>Personality:</strong> {preferences.personality}
+            </p>
+            <p>
+              <strong>Preference:</strong> {preferences.preference}
+            </p>
+            <p>
+              <strong>Habits:</strong> {preferences.habits}
+            </p>
+            <p>
+              <strong>Beliefs:</strong> {preferences.beliefs}
+            </p>
+            <p>
+              <strong>Languages:</strong> {preferences.languages?.join(", ")}
+            </p>
+          </div>
+        </div>
         <h2 className="text-2xl font-bold mb-4">Matched Guides</h2>
         {matchedGuides.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
