@@ -2,6 +2,8 @@
 
 import { faker } from "@faker-js/faker";
 import { countries_list } from "@/constants/country-data";
+import { firestore } from "@/app/firebaseConfig";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 // Further Expanded Bio Generator
 function generateEnglishBio() {
@@ -88,3 +90,17 @@ export const guideProfiles = countries_list.flatMap((country) => {
   }
   return profiles;
 });
+
+// Function to query guides based on a specific country
+export const getGuidesByCountry = async (countryName) => {
+  try {
+    const guidesCollection = collection(firestore, "guides");
+    const q = query(guidesCollection, where("country", "==", countryName));
+    const querySnapshot = await getDocs(q);
+    const guides = querySnapshot.docs.map((doc) => doc.data());
+    return guides; // Return the list of guides
+  } catch (error) {
+    console.error("Error querying guides: ", error);
+    return []; // Return an empty array in case of error
+  }
+};
