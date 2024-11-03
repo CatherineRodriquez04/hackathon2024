@@ -4,7 +4,10 @@
 
 import { useEffect, useState } from "react";
 import { countries, countries_list } from "@/constants/country-data";
-import { guideProfiles } from "@/utils/scripts/generateGuides";
+import {
+  getGuidesByCountry,
+  guideProfiles,
+} from "@/utils/scripts/generateGuides";
 
 import Image from "next/image";
 
@@ -13,6 +16,7 @@ export default function MapPage() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
+  const [guideProfiles, setGuideProfiles] = useState([]);
 
   useEffect(() => {
     const loadMap = () => {
@@ -48,7 +52,7 @@ export default function MapPage() {
     };
   }, []);
 
-  const handleCountrySelect = (e) => {
+  const handleCountrySelect = async (e) => {
     const selected = e.target.value;
     setSelectedCountry(selected);
     setCountryInfo(countries[selected]);
@@ -69,6 +73,12 @@ export default function MapPage() {
       });
 
       setMarker(newMarker);
+
+      console.log(selected);
+
+      // Fetch guides for the selected country
+      const fetchedGuides = await getGuidesByCountry(selected); // Wait for the guides
+      setGuideProfiles(fetchedGuides); // Update state with the fetched guides
     }
   };
 
@@ -86,10 +96,7 @@ export default function MapPage() {
           <option value="">Select a Country...</option>
           {countries_list.map(({ name: countryName }) => {
             return (
-              <option
-                key={countryName}
-                value={countryName}
-              >
+              <option key={countryName} value={countryName}>
                 {countryName}
               </option>
             );
@@ -98,10 +105,7 @@ export default function MapPage() {
       </div>
 
       {/* Map will be rendered here (attaches here) */}
-      <div
-        id="map"
-        className="h-[400px] w-full mt-4 relative z-0"
-      />
+      <div id="map" className="h-[400px] w-full mt-4 relative z-0" />
 
       {countryInfo && (
         <div className="flex flex-col items-center justify-center mt-6 space-x-4">
@@ -155,28 +159,30 @@ export default function MapPage() {
             <h2 className="text-xl font-bold">Guides</h2>
 
             <div className="flex flex-col flex-grow">
-              {guideProfiles.map((profile) => {
-                if (profile.country === selectedCountry) {
-                  return (
-                    <div
-                      key={profile.id}
-                      className="flex flex-row items-center mb-2 border border-gray-300 shadow-sm p-2 rounded"
-                    >
-                      <Image
-                        src={profile.photo}
-                        width={40}
-                        height={40}
-                        alt="Profile Picture"
-                      />
-                      <div className="flex flex-col ml-2">
-                        <h1 className="font-semibold">{profile.name}</h1>
-                        <p className="text-gray-600">{profile.bio}</p>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+              {guideProfiles.length === 0
+                ? null
+                : guideProfiles.map((profile) => {
+                    if (profile.country === selectedCountry) {
+                      return (
+                        <div
+                          key={profile.id}
+                          className="flex flex-row items-center mb-2 border border-gray-300 shadow-sm p-2 rounded"
+                        >
+                          <Image
+                            src={profile.photo}
+                            width={40}
+                            height={40}
+                            alt="Profile Picture"
+                          />
+                          <div className="flex flex-col ml-2">
+                            <h1 className="font-semibold">{profile.name}</h1>
+                            <p className="text-gray-600">{profile.bio}</p>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
             </div>
           </div>
         </div>
