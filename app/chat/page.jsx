@@ -11,6 +11,8 @@ import {
   onSnapshot,
   doc,
   getDoc,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 import Link from "next/link";
 
@@ -68,22 +70,35 @@ export default function ChatPage() {
   // }, [chatIDs]);
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
-        <h1 className="self-center">Chat IDs</h1>
-        <p>Click any to go to dynamic route with chat...</p>
-        <ul className="flex flex-col">
-          {chatIDs.map((id, index) => (
-            <li
-              key={index}
-              className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
-            >
-              <Link href={`chat/params?chatID=${id}`}>{id}</Link>
-            </li>
-          ))}
-        </ul>
+    <div className="flex flex-col min-h-screen">
+      {/* Tab Bar */}
+      <div className="flex justify-between bg-gray-100 p-4 border-b border-gray-300">
+        <h2 className="text-xl font-bold">Chat Application</h2>
+        <Link href="/preferences/edit">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Edit Preferences
+          </button>
+        </Link>
       </div>
-      <div className="flex flex-col flex-[5] bg-gray-500 border border-gray-300"></div>
+
+      {/* Chat List */}
+      <div className="flex flex-row flex-1">
+        <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
+          <h1 className="self-center">Chat IDs</h1>
+          <p>Click any to go to dynamic route with chat...</p>
+          <ul className="flex flex-col">
+            {chatIDs.map((id, index) => (
+              <li
+                key={index}
+                className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
+              >
+                <Link href={`chat/params?chatID=${id}`}>{id}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex flex-col flex-[5] bg-gray-500 border border-gray-300"></div>
+      </div>
     </div>
   );
 }
