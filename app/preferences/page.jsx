@@ -342,7 +342,7 @@ export default function PreferencesPage() {
               <option value="Judaism">Judaism</option>
               <option value="Sikhism">Sikhism</option>
               <option value="Jainism">Jainism</option>
-              <option value="Bahá'í">Bahá'í</option>
+              <option value="Bahá&apos;í">Bahá&apos;í</option>
               <option value="Taoism">Taoism</option>
               <option value="No Preference">No Preference</option>
             </select>
