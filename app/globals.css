@@ -22,3 +22,32 @@
       -webkit-text-stroke: 1px black;
   }
 }
+
+/* Custom background with GIF */
+.bg-full-minus-header {
+    height: calc(100vh); /* Adjust `4rem` to match your header height */
+    width: 100vw; /* Ensure full viewport width */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .bg-gif-background {
+    background-image: url("/assets/temp.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  @keyframes slow-move {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-slow-move {
+    animation: slow-move 30s linear infinite;
+  }
