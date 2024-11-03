@@ -2,13 +2,16 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { auth, db } from "../firebaseConfig"; // Ensure the path is correct
+import { auth, firestore } from "../firebaseConfig"; // Ensure the path is correct
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import dayjs from "dayjs";
+import { guideProfiles } from "@/utils/scripts/generateGuides"; // Import guide profiles
 
 export default function PreferencesPage() {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [matchedGuides, setMatchedGuides] = useState([]);
 
   // Fields for the preferences form
   const [gender, setGender] = useState("");
@@ -24,11 +27,8 @@ export default function PreferencesPage() {
       if (user) {
         setUser(user);
         try {
-          // Check if the user already has preferences set
-          const docRef = doc(db, "userPreferences", user.uid);
+          const docRef = doc(firestore, "userPreferences", user.uid);
           const docSnap = await getDoc(docRef);
-
-          // User already set their preferences so redirect them to their dashboards
           if (docSnap.exists()) {
             router.push("/dashboard");
           }
@@ -63,22 +63,26 @@ export default function PreferencesPage() {
         preference,
         habits,
         beliefs,
-        languages: languages.join(", "),
+        languages: languages,
       };
 
+      alert(languages);
+
       try {
-        // Add data to Firestore under a document with the user's UID
-        await setDoc(doc(db, "userPreferences", user.uid), userPreferences);
-        alert("Preferences saved successfully!");
-        window.location.reload();
+        await setDoc(
+          doc(firestore, "userPreferences", user.uid),
+          userPreferences
+        );
       } catch (error) {
         console.error("Error saving preferences: ", error);
         alert("Failed to save preferences. Please try again.");
       }
+
+      matchGuides(userPreferences);
+      setFormSubmitted(true);
     }
   };
 
-  // Function to handle language selection
   const handleLanguageChange = (e) => {
     const { options } = e.target;
     const selectedLanguages = [];
@@ -90,8 +94,45 @@ export default function PreferencesPage() {
     setLanguages(selectedLanguages);
   };
 
-  return (
-    <>
+  // Function to find matching guides based on user preferences
+  const matchGuides = (preferences) => {
+    const matched = guideProfiles.filter((guide) => {
+      return guide.country === preferences.country;
+    });
+    setMatchedGuides(matched);
+  };
+
+  if (formSubmitted) {
+    return (
+      <div className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Matched Guides</h2>
+        {matchedGuides.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {matchedGuides.map((guide) => (
+              <div key={guide.id} className="p-4 border rounded shadow-md">
+                <img
+                  src={guide.photo}
+                  alt={guide.name}
+                  className="mb-2 rounded-full"
+                />
+                <h3 className="text-lg font-semibold">{guide.name}</h3>
+                <p>{guide.bio}</p>
+                <p>
+                  <strong>Location:</strong> {guide.location}
+                </p>
+                <p>
+                  <strong>Languages:</strong> {guide.language.join(", ")}
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No matching guides found based on your preferences.</p>
+        )}
+      </div>
+    );
+  } else {
+    return (
       <div className="container h-screen w-screen flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
         {/* Greeting and text section */}
         <div className="lg:w-1/2 mb-8 lg:mb-0 text-center lg:text-left">
@@ -285,6 +326,6 @@ export default function PreferencesPage() {
           </div>
         </form>
       </div>
-    </>
-  );
+    );
+  }
 }
