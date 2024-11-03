@@ -15,13 +15,12 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 
 import Link from "next/link";
 
-export default function ChatIDPage() {
-  const searchParams = useSearchParams();
-  const chatID = searchParams.get("chatID");
+export default function Chat({ chatID }) {
+  //   const searchParams = useSearchParams();
+  //   const chatID = searchParams.get("chatID");
 
   //   console.log("chatID ... ", chatID);
 
@@ -80,8 +79,8 @@ export default function ChatIDPage() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col h-1/2">
-        <div className="flex-grow overflow-y-auto p-4 flex flex-col">
+      <div className="flex flex-col flex-grow">
+        <div className=" p-4 flex flex-col space-y-2">
           {chatMessages.map((msg, index) => (
             <div
               key={index}
@@ -120,17 +119,6 @@ export default function ChatIDPage() {
             Send
           </button>
         </div>
-      </div>
-      <div className="">
-        <h1>Chat IDs</h1>
-        <p>Click any to go to dynamic route with chat...</p>
-        <ul>
-          {chatMessages.map((msg, index) => (
-            <li key={index}>
-              <Link href={"@/app/"}>{msg.id}</Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

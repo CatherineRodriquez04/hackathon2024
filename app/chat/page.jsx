@@ -13,9 +13,12 @@ import {
   getDoc,
 } from "firebase/firestore";
 import Link from "next/link";
+import Chat from "@/components/Chat";
 
 export default function ChatPage() {
   const [chatIDs, setChatIDs] = useState([]);
+
+  const [selectedChatID, setSelectedChatID] = useState(null);
 
   // const fetchChatMessages = async () => {
   //   const chatRef = collection(firestore, "chats"); // Use collection reference directly
@@ -70,20 +73,28 @@ export default function ChatPage() {
   return (
     <div className="flex flex-row">
       <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
-        <h1 className="self-center">Chat IDs</h1>
-        <p>Click any to go to dynamic route with chat...</p>
         <ul className="flex flex-col">
           {chatIDs.map((id, index) => (
             <li
               key={index}
               className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
             >
-              <Link href={`chat/params?chatID=${id}`}>{id}</Link>
+              <div onClick={() => setSelectedChatID(id)}>Dudes Name</div>
             </li>
           ))}
         </ul>
       </div>
-      <div className="flex flex-col flex-[5] bg-gray-500 border border-gray-300"></div>
+      <div className="flex flex-col flex-[5] rounded-sm shadow-sm border border-gray-300 bg-white">
+        {selectedChatID ? (
+          <div className="">
+            <Chat chatID={selectedChatID} />
+          </div>
+        ) : (
+          <div className="flex flex-col flex-5 min-h-screen border border-gray-300 bg-white rounded-sm shadow-sm">
+            <h1 className="self-center">Select a chat to view</h1>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
