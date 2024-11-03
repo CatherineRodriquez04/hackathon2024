@@ -16,10 +16,10 @@ const links = [
         name: 'home',
         path: '/',
     },
-    {
-        name: 'about',
-        path: '#about',
-    },
+    // {
+    //     name: 'about',
+    //     path: '#about',
+    // },
     {
         name: 'map',
         path: '/map',
