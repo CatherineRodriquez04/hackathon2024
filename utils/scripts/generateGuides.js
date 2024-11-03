@@ -91,6 +91,18 @@ export const guideProfiles = countries_list.flatMap((country) => {
   return profiles;
 });
 
+// export const saveGuidesToFirestore = async () => {
+//   try {
+//     const guidesCollection = collection(firestore, "guides");
+//     for (const guide of guideProfiles) {
+//       await addDoc(guidesCollection, guide);
+//     }
+//     console.log("All guides have been successfully saved to Firestore.");
+//   } catch (error) {
+//     console.error("Error saving guides to Firestore: ", error);
+//   }
+// };
+
 // Function to query guides based on a specific country
 export const getGuidesByCountry = async (countryName) => {
   try {
