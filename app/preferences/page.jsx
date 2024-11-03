@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { auth, db } from "../firebaseConfig"; // Ensure the path is correct
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import dayjs from "dayjs";
 
 export default function PreferencesPage() {
@@ -20,9 +20,21 @@ export default function PreferencesPage() {
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
+        try {
+          // Check if the user already has preferences set
+          const docRef = doc(db, "userPreferences", user.uid);
+          const docSnap = await getDoc(docRef);
+
+          // User already set their preferences so redirect them to their dashboards
+          if (docSnap.exists()) {
+            router.push("/dashboard");
+          }
+        } catch (error) {
+          console.error("Error checking user preferences: ", error);
+        }
       } else {
         router.push("/login");
       }
