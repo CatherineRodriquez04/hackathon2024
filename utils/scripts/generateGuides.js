@@ -3,7 +3,15 @@
 import { faker } from "@faker-js/faker";
 import { countries_list } from "@/constants/country-data";
 import { firestore } from "@/app/firebaseConfig";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 // Further Expanded Bio Generator
 function generateEnglishBio() {
@@ -69,13 +77,17 @@ function generateEnglishBio() {
 
 // Function to generate a random travel guide profile
 export function generateGuideProfile(country) {
+  const languages = country.languages.includes("English")
+    ? country.languages
+    : ["English", ...country.languages];
+
   return {
     id: faker.string.uuid(),
     name: faker.person.fullName(),
     bio: generateEnglishBio(), // Uses the expanded English bio generator
     country: country.name,
     location: `${faker.helpers.arrayElement(country.cities)}, ${country.name}`,
-    language: ["English", ...country.languages],
+    language: languages,
     photo: faker.image.avatar(),
   };
 }
@@ -110,9 +122,44 @@ export const getGuidesByCountry = async (countryName) => {
     const q = query(guidesCollection, where("country", "==", countryName));
     const querySnapshot = await getDocs(q);
     const guides = querySnapshot.docs.map((doc) => doc.data());
+
+    console.log("getGuidesByCountry (/chat)... ", guides);
+
     return guides; // Return the list of guides
   } catch (error) {
     console.error("Error querying guides: ", error);
     return []; // Return an empty array in case of error
   }
 };
+
+// Function to add a new guide to Firestore
+export const addGuideAndChat = async (guideData) => {
+  try {
+    // guide
+    const guidesRef = await addDoc(collection(firestore, "guides"), guideData);
+    // console.log("Guide added with ID: ", guidesRef.id);
+
+    // chat (made with same ID as guides)
+    const initChats = [
+      {
+        message: guideData.bio,
+        sender: "guide",
+        timestamp: Date.now(),
+      },
+    ];
+
+    // Add chat document with the same ID as the guide
+    const chatRef = doc(firestore, "chats", guidesRef.id);
+    await setDoc(chatRef, {
+      chatMessages: initChats,
+      guide_name: guideData.name,
+    });
+    // console.log("Chat Messages added with ID: ", guidesRef.id);
+  } catch (error) {
+    console.error("Error adding guide: ", error);
+  }
+};
+
+// Only run one time to not bloat firestore
+// guideProfiles.map((guideData) => addGuideAndChat(guideData));
+//

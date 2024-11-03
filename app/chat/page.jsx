@@ -13,9 +13,13 @@ import {
   getDoc,
 } from "firebase/firestore";
 import Link from "next/link";
+import Chat from "@/components/Chat";
 
 export default function ChatPage() {
   const [chatIDs, setChatIDs] = useState([]);
+  const [guideNames, setGuideNames] = useState([]);
+
+  const [selectedChatID, setSelectedChatID] = useState(null);
 
   // const fetchChatMessages = async () => {
   //   const chatRef = collection(firestore, "chats"); // Use collection reference directly
@@ -39,6 +43,7 @@ export default function ChatPage() {
 
     const unsubscribe = onSnapshot(chatRef, (querySnapshot) => {
       const idsWithTimes = [];
+      const gNames = [];
 
       querySnapshot.forEach((doc) => {
         const messages = doc.data().messages;
@@ -51,6 +56,8 @@ export default function ChatPage() {
           id: doc.id,
           latestTime: latestTime || 0, // Default to 0 if no time exists
         });
+
+        gNames.push(doc.data().guide_name);
       });
 
       // Sort by `latestTime` and extract only the IDs
@@ -58,44 +65,47 @@ export default function ChatPage() {
       const sortedIds = idsWithTimes.map((item) => item.id);
 
       setChatIDs(sortedIds); // Set sorted IDs
+      setGuideNames(gNames); // Set guide names
     });
 
     return () => unsubscribe();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("Updated chat IDs: ", chatIDs);
-  // }, [chatIDs]);
+  useEffect(() => {
+    console.log("Updated chat IDs: ", guideNames);
+  }, [guideNames]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Tab Bar */}
-      <div className="flex justify-between bg-gray-100 p-4 border-b border-gray-300">
-        <h2 className="text-xl font-bold">Chat Application</h2>
-        <Link href="/preferences/edit">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-            Edit Preferences
-          </button>
-        </Link>
-      </div>
-
-      {/* Chat List */}
-      <div className="flex flex-row flex-1">
-        <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
-          <h1 className="self-center">Chat IDs</h1>
-          <p>Click any to go to dynamic route with chat...</p>
-          <ul className="flex flex-col">
-            {chatIDs.map((id, index) => (
-              <li
-                key={index}
-                className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
+    <div className="flex flex-row">
+      <div className="flex flex-col flex-1 min-h-screen mx-4 border border-gray-300 p-4">
+        <ul className="flex flex-col">
+          {chatIDs.map((id, index) => (
+            <li
+              key={index}
+              className="p-4 border rounded-sm shadow-sm border-gray-200 bg-white"
+            >
+              <div
+                onClick={() => {
+                  console.log(id);
+                  return setSelectedChatID(id);
+                }}
               >
-                <Link href={`chat/params?chatID=${id}`}>{id}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="flex flex-col flex-[5] bg-gray-500 border border-gray-300"></div>
+                {guideNames[index]}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex flex-col flex-[5] rounded-sm shadow-sm border border-gray-300 bg-white">
+        {selectedChatID ? (
+          <div className="">
+            <Chat chatID={selectedChatID} />
+          </div>
+        ) : (
+          <div className="flex flex-col flex-5 min-h-screen border border-gray-300 bg-white rounded-sm shadow-sm">
+            <h1 className="self-center">Select a chat to view</h1>
+          </div>
+        )}
       </div>
     </div>
   );
