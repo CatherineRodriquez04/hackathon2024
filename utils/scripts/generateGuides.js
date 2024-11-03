@@ -83,12 +83,16 @@ function generateEnglishBio() {
 
 // Function to generate a random travel guide profile
 function generateGuideProfile(country) {
+
+    // Include "English" only if it's not already in the list of languages
+    const languages = country.languages.includes("English") ? country.languages : ["English", ...country.languages];
+
     return {
         name: faker.person.fullName(),
         bio: generateEnglishBio(),  // Uses the expanded English bio generator
         country: country.name,
         location: `${faker.helpers.arrayElement(country.cities)}, ${country.name}`,
-        language: ["English", ...country.languages],
+        language: languages,
         photo: faker.image.avatar(),
     };
 }
