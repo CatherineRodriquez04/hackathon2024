@@ -120,13 +120,13 @@ export default function MapPage() {
               src={countryInfo.flags}
               alt={`${countryInfo.capital} flag`}
               width={300}
-              height={175}
+              height={150}
               className="object-cover border border-gray-500"
             />
 
             {/* Country Info */}
             <div className="text-center">
-              <h2 className="text-2xl text-accent2 font-semibold">
+              <h2 className="text-3xl mb-2 text-accent2 font-semibold">
                 {countryInfo.country}
               </h2>
               <p>
@@ -153,7 +153,7 @@ export default function MapPage() {
                 alt={countryInfo.touristSpot}
                 height={200}
                 width={275}
-                className=""
+                className="rounded-lg"
               />
               <p className="text-accent font-semibold">
                 {countryInfo.touristSpot.name}
@@ -161,9 +161,9 @@ export default function MapPage() {
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-bold">Guides</h2>
+            <h2 className="mt-5 text-3xl font-bold">Guides</h2>
 
-            <div className="flex flex-col flex-grow">
+            <div className="flex mt-5 flex-col flex-grow">
               {guideProfiles.length === 0
                 ? null
                 : guideProfiles.map((profile) => {

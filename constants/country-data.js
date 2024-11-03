@@ -21,6 +21,7 @@ import Acropolis from "@/public/assets/touristSpot/acropolis.jpg";
 
 export const countries = {
   "United States": {
+    country: "United States",
     flags: "https://flagcdn.com/us.svg",
     capital: "Washington, D.C.",
     cities: [
@@ -45,6 +46,7 @@ export const countries = {
     languages: ["English"],
   },
   France: {
+    country: "France",
     flags: "https://flagcdn.com/fr.svg",
     capital: "Paris",
     cities: [
@@ -69,6 +71,7 @@ export const countries = {
     languages: ["French"],
   },
   Italy: {
+    country: "France",
     flags: "https://flagcdn.com/it.svg",
     capital: "Rome",
     cities: [
@@ -93,6 +96,7 @@ export const countries = {
     languages: ["Italian"],
   },
   Norway: {
+    country: "Norway",
     flags: "https://flagcdn.com/no.svg",
     capital: "Oslo",
     cities: [
@@ -117,6 +121,7 @@ export const countries = {
     languages: ["Norwegian"],
   },
   Sweden: {
+    country: "Swedan",
     flags: "https://flagcdn.com/se.svg",
     capital: "Stockholm",
     cities: [
@@ -141,6 +146,7 @@ export const countries = {
     languages: ["Swedish"],
   },
   Germany: {
+    country: "Germany",
     flags: "https://flagcdn.com/de.svg",
     capital: "Berlin",
     cities: [
@@ -165,6 +171,7 @@ export const countries = {
     languages: ["German"],
   },
   Switzerland: {
+    country: "Switzerland",
     flags: "https://flagcdn.com/ch.svg",
     capital: "Bern",
     cities: [
@@ -189,6 +196,7 @@ export const countries = {
     languages: ["German", "French", "Italian"],
   },
   England: {
+    country: "England",
     flags: "https://flagcdn.com/gb-eng.svg",
     capital: "London",
     cities: [
@@ -213,6 +221,7 @@ export const countries = {
     languages: ["English"],
   },
   Canada: {
+    country: "Canada",
     flags: "https://flagcdn.com/ca.svg",
     capital: "Ottawa",
     cities: [
@@ -237,6 +246,7 @@ export const countries = {
     languages: ["English", "French"],
   },
   China: {
+    country: "China",
     flags: "https://flagcdn.com/cn.svg",
     capital: "Beijing",
     cities: [
@@ -261,6 +271,7 @@ export const countries = {
     languages: ["Mandarin"],
   },
   "South Korea": {
+    country: "South Korea",
     flags: "https://flagcdn.com/kr.svg",
     capital: "Seoul",
     cities: [
@@ -285,6 +296,7 @@ export const countries = {
     languages: ["Korean"],
   },
   Japan: {
+    country: "Japan",
     flags: "https://flagcdn.com/jp.svg",
     capital: "Tokyo",
     cities: [
@@ -309,6 +321,7 @@ export const countries = {
     languages: ["Japanese"],
   },
   India: {
+    country: "India",
     flags: "https://flagcdn.com/in.svg",
     capital: "New Delhi",
     cities: [
@@ -333,6 +346,7 @@ export const countries = {
     languages: ["Hindi"],
   },
   Nepal: {
+    country: "Nepal",
     flags: "https://flagcdn.com/np.svg",
     capital: "Kathmandu",
     cities: [
@@ -357,6 +371,7 @@ export const countries = {
     languages: ["Nepali"],
   },
   Vietnam: {
+    country: "Vietnam",
     flags: "https://flagcdn.com/vn.svg",
     capital: "Hanoi",
     cities: [
@@ -381,6 +396,7 @@ export const countries = {
     languages: ["Vietnamese"],
   },
   Thailand: {
+    country: "Thailand",
     flags: "https://flagcdn.com/th.svg",
     capital: "Bangkok",
     cities: [
@@ -405,6 +421,7 @@ export const countries = {
     languages: ["Thai"],
   },
   Greece: {
+    country: "Greece",
     flags: "https://flagcdn.com/gr.svg",
     capital: "Athens",
     cities: [
