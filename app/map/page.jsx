@@ -161,7 +161,7 @@ export default function MapPage() {
             </div>
           </div>
           <div>
-            <h2 className="mt-5 text-3xl font-bold">Guides</h2>
+            <h2 className="mt-2 text-3xl font-bold">Guides</h2>
 
             <div className="flex mt-5 flex-col flex-grow">
               {guideProfiles.length === 0
