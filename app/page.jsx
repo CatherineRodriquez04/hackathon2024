@@ -112,7 +112,7 @@ export default function Home() {
         <div className="flex-1">
           {/* Personalized Guide Matching Box */}
           <div 
-            className="relative p-6 rounded-xl shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer flex justify-between items-center"
+            className="relative p-6 rounded-xl shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer flex justify-between items-center"
             onClick={handleGuidePopupToggle}
           >
             <h3 className="text-xl font-semibold text-gray-800">Personalized Guide Matching</h3>
@@ -122,7 +122,7 @@ export default function Home() {
 
           {/* Interactive Map Feature Box */}
           <div 
-            className="relative p-6 mt-4 rounded-xl shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer flex justify-between items-center"
+            className="relative p-6 mt-4 rounded-xl shadow-xl transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer flex justify-between items-center"
             onClick={handleMapPopupToggle}
           >
             <h3 className="text-xl font-semibold text-gray-800">Interactive Map</h3>
