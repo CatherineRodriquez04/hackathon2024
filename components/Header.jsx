@@ -28,8 +28,6 @@ const Header = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-      } else {
-        router.push("/login");
       }
     });
 
@@ -64,7 +62,7 @@ const Header = () => {
         {user ? (
           <div className="hidden xl:flex items-center gap-8">
             <Nav />
-            <Link href="/profile">
+            <Link href="/chat">
               <Image
                 src={user.photoURL}
                 alt="Profile"
