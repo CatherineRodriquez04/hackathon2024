@@ -8,6 +8,7 @@ import {
   getGuidesByCountry,
   guideProfiles,
 } from "@/utils/scripts/generateGuides";
+import Link from "next/link";
 
 import Image from "next/image";
 
@@ -96,13 +97,19 @@ export default function MapPage() {
           <option value="">Select a Country...</option>
           {countries_list.map(({ name: countryName }) => {
             return (
-              <option key={countryName} value={countryName}>
+              <option
+                key={countryName}
+                value={countryName}
+              >
                 {countryName}
               </option>
             );
           })}
           {countries_list.map(({ name: countryName }) => (
-            <option key={countryName} value={countryName}>
+            <option
+              key={countryName}
+              value={countryName}
+            >
               {countryName}
             </option>
           ))}
@@ -110,7 +117,10 @@ export default function MapPage() {
       </div>
 
       {/* Map will be rendered here (attaches here) */}
-      <div id="map" className="h-[400px] w-full mt-4 relative z-0" />
+      <div
+        id="map"
+        className="h-[400px] w-full mt-4 relative z-0"
+      />
 
       {countryInfo && (
         <div className="flex flex-col items-center justify-center mt-6 space-x-4">
@@ -173,16 +183,18 @@ export default function MapPage() {
                           key={profile.id}
                           className="flex flex-row items-center mb-2 border border-gray-300 shadow-sm p-2 rounded"
                         >
-                          <Image
-                            src={profile.photo}
-                            width={40}
-                            height={40}
-                            alt="Profile Picture"
-                          />
-                          <div className="flex flex-col ml-2">
-                            <h1 className="font-semibold">{profile.name}</h1>
-                            <p className="text-gray-600">{profile.bio}</p>
-                          </div>
+                          <Link href="/chat">
+                            <Image
+                              src={profile.photo}
+                              width={40}
+                              height={40}
+                              alt="Profile Picture"
+                            />
+                            <div className="flex flex-col ml-2">
+                              <h1 className="font-semibold">{profile.name}</h1>
+                              <p className="text-gray-600">{profile.bio}</p>
+                            </div>
+                          </Link>
                         </div>
                       );
                     }
