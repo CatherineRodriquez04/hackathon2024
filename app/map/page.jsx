@@ -84,10 +84,10 @@ export default function MapPage() {
 
   return (
     <div className="mt-6 mb-[150px]">
-      <h1 className="h1 text-[30px]">Plan your next Adventure!</h1>
+      <h1 className="h1 text-[30px] text-center">Plan your next Adventure!</h1>
 
       {/* Country Selector */}
-      <div className="relative z-10 mt-3">
+      <div className="flex justify-center mt-3">
         <select
           value={selectedCountry}
           onChange={handleCountrySelect}
@@ -101,6 +101,11 @@ export default function MapPage() {
               </option>
             );
           })}
+          {countries_list.map(({ name: countryName }) => (
+            <option key={countryName} value={countryName}>
+              {countryName}
+            </option>
+          ))}
         </select>
       </div>
 

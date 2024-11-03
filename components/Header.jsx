@@ -37,7 +37,7 @@ const Header = () => {
   }, [router]);
 
   return (
-    <header className="py-4 xl:py-4 text-black">
+    <header className="py-4 xl:py-4 text-black ">
       <div className="xl:mx-8 mx-3 flex justify-between items-center">
         {/* logo */}
         <Link href="/">
@@ -68,9 +68,9 @@ const Header = () => {
               <Image
                 src={user.photoURL}
                 alt="Profile"
-                width={40}
-                height={40}
-                className="w-10 h-10 rounded-full"
+                width={60}
+                height={60}
+                className="rounded-full"
               />
             </Link>
           </div>
